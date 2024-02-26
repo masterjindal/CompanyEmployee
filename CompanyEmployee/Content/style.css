@@ -1,0 +1,10 @@
+﻿.backgroundColor {
+  background-color: #6133FF;
+}
+.footer {
+  background-color: #6133FF;
+  width: 100%;
+  height: 30px;
+  bottom: 0;
+  position: fixed;
+}
