@@ -1,6 +1,4 @@
-﻿@model IEnumerable<CompanyEmployee.Models.Department>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
@@ -9,25 +7,32 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartmentName)
-        </th>
-        <th></th>
+<table>
+    <tr><th>Department</th></tr>
+    <tr id="departments">
+        
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartmentName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
 </table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/Departments/GetDepartments",
+                success: function (response) {
+                    
+                    var result = "";
+                    var departments = $("#departments");
+                    
+
+                    $(response).each(function () {
+                        result += '<tr><td><p>' + this.DepartmentName + '</p></td></tr>';
+                        $("#departmentName").text(this.DepartmentName)
+                    })
+                    departments.html(result);
+                }
+            })
+        })
+    </script>
+}

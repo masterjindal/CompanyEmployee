@@ -18,7 +18,15 @@ namespace CompanyEmployee.Controllers
         // GET: Departments
         public ActionResult Index()
         {
-            return View(db.Departments.ToList());
+            return View();
+        }
+
+        // GET: Departments
+        [HttpGet]
+        public JsonResult GetDepartments()
+        {
+            List<Department> departments = db.Departments.ToList();
+            return Json(departments, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Departments/Details/5
